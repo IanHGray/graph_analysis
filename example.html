@@ -1,0 +1,109 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 750px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Jimmy Page", "label": "Jimmy Page", "shape": "dot", "title": "Jimmy Page"}, {"id": "Yardbirds", "label": "Yardbirds", "shape": "dot", "title": "Yardbirds"}, {"id": "Led Zeppelin", "label": "Led Zeppelin", "shape": "dot", "title": "Led Zeppelin"}, {"id": "Little Games", "label": "Little Games", "shape": "dot", "title": "Little Games"}, {"id": "Over Under Sideways Down", "label": "Over Under Sideways Down", "shape": "dot", "title": "Over Under Sideways Down"}, {"id": "Having a Rave Up with The Yardbirds", "label": "Having a Rave Up with The Yardbirds", "shape": "dot", "title": "Having a Rave Up with The Yardbirds"}, {"id": "For Your Love", "label": "For Your Love", "shape": "dot", "title": "For Your Love"}, {"id": "Jeff Beck", "label": "Jeff Beck", "shape": "dot", "title": "Jeff Beck"}, {"id": "Jeff Beck Group", "label": "Jeff Beck Group", "shape": "dot", "title": "Jeff Beck Group"}, {"id": "Eric Clapton", "label": "Eric Clapton", "shape": "dot", "title": "Eric Clapton"}, {"id": "Cream", "label": "Cream", "shape": "dot", "title": "Cream"}, {"id": "Jack Bruce", "label": "Jack Bruce", "shape": "dot", "title": "Jack Bruce"}, {"id": "Goodbye", "label": "Goodbye", "shape": "dot", "title": "Goodbye"}, {"id": "Wheels of Fire", "label": "Wheels of Fire", "shape": "dot", "title": "Wheels of Fire"}, {"id": "Disraeli Gears", "label": "Disraeli Gears", "shape": "dot", "title": "Disraeli Gears"}, {"id": "Fresh Cream", "label": "Fresh Cream", "shape": "dot", "title": "Fresh Cream"}, {"id": "Ginger Baker", "label": "Ginger Baker", "shape": "dot", "title": "Ginger Baker"}, {"id": "Carmine Appice", "label": "Carmine Appice", "shape": "dot", "title": "Carmine Appice"}, {"id": "Rough and Ready", "label": "Rough and Ready", "shape": "dot", "title": "Rough and Ready"}, {"id": "Beck-Ola", "label": "Beck-Ola", "shape": "dot", "title": "Beck-Ola"}, {"id": "Truth", "label": "Truth", "shape": "dot", "title": "Truth"}, {"id": "Tim Bogert", "label": "Tim Bogert", "shape": "dot", "title": "Tim Bogert"}, {"id": "John Bonham", "label": "John Bonham", "shape": "dot", "title": "John Bonham"}, {"id": "In Through the Out Door", "label": "In Through the Out Door", "shape": "dot", "title": "In Through the Out Door"}, {"id": "Presence", "label": "Presence", "shape": "dot", "title": "Presence"}, {"id": "Physical Graffiti", "label": "Physical Graffiti", "shape": "dot", "title": "Physical Graffiti"}, {"id": "Houses of the Holy", "label": "Houses of the Holy", "shape": "dot", "title": "Houses of the Holy"}, {"id": "Led Zeppelin IV", "label": "Led Zeppelin IV", "shape": "dot", "title": "Led Zeppelin IV"}, {"id": "Led Zeppelin III", "label": "Led Zeppelin III", "shape": "dot", "title": "Led Zeppelin III"}, {"id": "Led Leppelin II", "label": "Led Leppelin II", "shape": "dot", "title": "Led Leppelin II"}, {"id": "John Paul Jones", "label": "John Paul Jones", "shape": "dot", "title": "John Paul Jones"}, {"id": "Robert Plant", "label": "Robert Plant", "shape": "dot", "title": "Robert Plant"}]);
+        edges = new vis.DataSet([{"from": "Jimmy Page", "to": "Yardbirds"}, {"from": "Jimmy Page", "to": "Led Zeppelin"}, {"from": "Yardbirds", "to": "Little Games"}, {"from": "Yardbirds", "to": "Over Under Sideways Down"}, {"from": "Yardbirds", "to": "Yardbirds"}, {"from": "Yardbirds", "to": "Having a Rave Up with The Yardbirds"}, {"from": "Yardbirds", "to": "For Your Love"}, {"from": "Jeff Beck", "to": "Yardbirds"}, {"from": "Jeff Beck", "to": "Jeff Beck Group"}, {"from": "Eric Clapton", "to": "Yardbirds"}, {"from": "Eric Clapton", "to": "Cream"}, {"from": "Jack Bruce", "to": "Cream"}, {"from": "Cream", "to": "Goodbye"}, {"from": "Cream", "to": "Wheels of Fire"}, {"from": "Cream", "to": "Disraeli Gears"}, {"from": "Cream", "to": "Fresh Cream"}, {"from": "Ginger Baker", "to": "Cream"}, {"from": "Carmine Appice", "to": "Jeff Beck Group"}, {"from": "Jeff Beck Group", "to": "Jeff Beck Group"}, {"from": "Jeff Beck Group", "to": "Rough and Ready"}, {"from": "Jeff Beck Group", "to": "Beck-Ola"}, {"from": "Jeff Beck Group", "to": "Truth"}, {"from": "Tim Bogert", "to": "Jeff Beck Group"}, {"from": "John Bonham", "to": "Led Zeppelin"}, {"from": "Led Zeppelin", "to": "In Through the Out Door"}, {"from": "Led Zeppelin", "to": "Presence"}, {"from": "Led Zeppelin", "to": "Physical Graffiti"}, {"from": "Led Zeppelin", "to": "Houses of the Holy"}, {"from": "Led Zeppelin", "to": "Led Zeppelin IV"}, {"from": "Led Zeppelin", "to": "Led Zeppelin III"}, {"from": "Led Zeppelin", "to": "Led Leppelin II"}, {"from": "Led Zeppelin", "to": "Led Zeppelin"}, {"from": "John Paul Jones", "to": "Led Zeppelin"}, {"from": "Robert Plant", "to": "Led Zeppelin"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        // default to using dot shape for nodes
+        options.nodes = {
+            shape: "dot"
+        }
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
