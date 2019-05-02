@@ -1,2 +1,2 @@
-# neo4j_utilities
-Some scripts/guides for working with Neo4j in Python. 
+# graph analysis
+Some scripts/guides for working with graph databases in Python. 
