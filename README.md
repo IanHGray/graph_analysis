@@ -1,4 +1,4 @@
-Quickstart: Graph Databases in Python
+# Quickstart: Graph Databases in Python
 
 Graph databases are a powerful tool for modeling complex relationships, detecting trends across networks, and querying information in ways simply unachievable with traditional relational databases.
 
